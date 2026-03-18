@@ -964,24 +964,8 @@
 </head>
 <body>
 
-  <!-- PASSWORD SCREEN -->
-  <div id="passwordScreen" class="password-screen">
-    <div class="password-box">
-      <div class="logo-container">
-        <img src="logo-white.svg" alt="Matador Fire" style="height:48px; width:auto;">
-      </div>
-      <div class="eyebrow">Restricted Access</div>
-      <h1>Wildfire Defense Calculator</h1>
-      <div class="password-input-row">
-        <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="off">
-        <button class="btn-primary" style="width:auto; margin-top:0; padding: 12px 28px; white-space:nowrap;" onclick="checkPassword()">Enter &rarr;</button>
-      </div>
-      <div id="passwordError" class="password-error">Incorrect password. Try again.</div>
-    </div>
-  </div>
-
-  <!-- MAIN APP (hidden until authenticated) -->
-  <div id="mainApp" style="display: none;">
+  <!-- MAIN APP -->
+  <div id="mainApp">
 
     <div class="container">
       <!-- HEADER -->
@@ -1295,24 +1279,6 @@
   <script src="matador-logger.js"></script>
   <script src="matador-log-viewer.js"></script>
   <script>
-    // ===== PASSWORD GATE =====
-    const CORRECT_PASSWORD = 'FIRE!';
-
-    function checkPassword() {
-      const input = document.getElementById('passwordInput').value;
-      if (input === CORRECT_PASSWORD) {
-        logger.info('User authenticated', { category: 'AUTH' });
-        document.getElementById('passwordScreen').style.display = 'none';
-        document.getElementById('mainApp').style.display = 'block';
-      } else {
-        document.getElementById('passwordError').classList.add('visible');
-        logger.warn('Failed password attempt', { category: 'AUTH' });
-      }
-    }
-    document.getElementById('passwordInput').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') checkPassword();
-    });
-
     // ===== SLIDER UPDATES =====
     const premiumSlider = document.getElementById('premiumSlider');
     const sqftSlider = document.getElementById('sqftSlider');
@@ -1485,9 +1451,9 @@
       logger.action('Shared on Facebook');
     }
 
-    function copyLink() {
+    function copyLink(event) {
+      const btn = event.currentTarget;
       navigator.clipboard.writeText(window.location.href).then(() => {
-        const btn = event.currentTarget;
         btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
         setTimeout(() => {
           btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
