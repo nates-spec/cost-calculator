@@ -1,1 +1,2 @@
 {"env":{"browser":true,"es2021":true},"extends":"eslint:recommended","plugins":["html"],"parserOptions":{"ecmaVersion":"latest"},"globals":{"logger":"readonly"},"rules":{"no-unused-vars":["error",{"varsIgnorePattern":"^(shareFacebook|shareTwitter|submitForm|recalculate|calculateResults|resultsSectionEl|copyLink)$"}]}}
+
